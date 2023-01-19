@@ -2,7 +2,7 @@ const path = require('path');
 const WebpackPwaManifest = require("webpack-pwa-manifest");
 const { GenerateSW } = require("workbox-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin")
-// TODO: Load CSS
+
 // TODO: webpack pwa manifest plugin
 // TODO: workbox-webpack-plugin
 // TODO: html-webpack-plugin
@@ -27,7 +27,21 @@ module.exports = () => {
     plugins: [
      new HtmlWebpackPlugin({
       template: "./index.html"
-     })
+     }),
+     new WebpackPwaManifest({
+        name: 'My Todo App',
+        short_name: 'TODOs',
+        description: 'My awesome TODOs Progressive Web App!',
+        background_color: '#ffffff',
+        publicPath: "/",
+        icons: [
+          {
+            src: path.resolve('src/images/logo.png'),
+            sizes: [96, 128, 192, 256, 384, 512] // multiple sizes
+          },
+        ]
+     }),
+     new GenerateSW(),
     ],
 
     // TODO: Add the correct modules
